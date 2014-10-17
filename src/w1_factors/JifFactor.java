@@ -33,7 +33,20 @@ public class JifFactor extends JInternalFrame
     private JInternalFrame frame;    
     private JTable         table;
     
+    
+    
     public JifFactor()
+    {
+        CreateComponents();
+    }
+    
+    public JifFactor(String title)
+    {
+        CreateComponents();
+        setTitle( title );
+    }
+            
+    private void CreateComponents()
     {
         table   = new JTable();
         frame   = new JInternalFrame();
@@ -44,6 +57,12 @@ public class JifFactor extends JInternalFrame
     
         frame.repaint();
         desktop.repaint();
+        
+        setIconifiable(true);
+        setMaximizable(true);
+        setAutoscrolls(true);
+        setVisible(true);
+    
     }
     
     
