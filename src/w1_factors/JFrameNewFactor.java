@@ -11,6 +11,7 @@ package w1_factors;
  */
 public class JFrameNewFactor extends javax.swing.JFrame {
     Factor factor;
+    int id;
     
     /**
      * Creates new form JFrameNewFactor
@@ -19,9 +20,11 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFrameNewFactor(Factor factor) {
+    public JFrameNewFactor(Factor factor, int id) {
         initComponents();
         this.factor = factor;
+        this.id     = id;
+        txtId.setText( Integer.toString(id) );
     }
     
     
@@ -164,6 +167,11 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         btnOk.setFocusable(false);
         btnOk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnOk.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnOk);
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Cancel_48x48.png"))); // NOI18N
@@ -187,6 +195,13 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        // TODO add your handling code here:
+        factor = new Factor( id, txtName.getText() );
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_btnOkActionPerformed
 
     /**
      * @param args the command line arguments

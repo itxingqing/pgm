@@ -25,6 +25,8 @@ import java.awt.*;
 import java.awt.Component;
 import java.util.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
@@ -36,7 +38,10 @@ import javax.swing.JTable;
 public class JFrameFactors extends javax.swing.JFrame {
 
     public RandomVarCollection vars = new RandomVarCollection();
-    public ArrayList<Factor>    factors;    
+    
+    //public ArrayList<Factor>    factors;    
+    public FactorCollection    factors;    
+    
     public Map<Factor, JInternalFrame> factorFrame = new HashMap<Factor, JInternalFrame>();
     
     private int frameBorder = 30; //cascade Frame border
@@ -57,7 +62,7 @@ public class JFrameFactors extends javax.swing.JFrame {
     /**
      * Creates new form JFrameFactors
      */
-    public JFrameFactors(RandomVarCollection vars, ArrayList<Factor> factors ) {
+    public JFrameFactors(RandomVarCollection vars, FactorCollection factors ) {
         initComponents();
         
         this.vars    = vars;
@@ -692,23 +697,32 @@ public class JFrameFactors extends javax.swing.JFrame {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO test create new factor
-        
         Factor f = null;
-        
-        // show gui
-        JFrameNewFactor fData = new JFrameNewFactor( f );
-        
-        if (f != null )
+        try 
         {
-            JifFactor frame = new JifFactor();            
-            factors.add(f);
-            f.FillTable();
-            f.copyTo(frame);
-            desktop.add(frame);
-        
-            desktop.repaint();
-            this.repaint();
+            // show gui
+            JFrameNewFactor fData = new JFrameNewFactor( f, factors.generateId() );
+            fData.setVisible( true );
+            
+            
+            if (f != null )
+            {
+                JifFactor frame = new JifFactor();            
+                factors.add(f);
+                f.FillTable();
+                f.copyTo(frame);
+                desktop.add(frame);
+
+                desktop.repaint();
+                this.repaint();
+            }
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnMarginalizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarginalizationActionPerformed

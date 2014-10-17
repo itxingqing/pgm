@@ -41,7 +41,8 @@ public class JFrameMain extends javax.swing.JFrame {
     
     //public ArrayList<RandomVar> vars    = new ArrayList<RandomVar>();
     public RandomVarCollection vars    = new RandomVarCollection();
-    public ArrayList<Factor>    factors = new ArrayList<Factor>();
+    //public ArrayList<Factor>    factors = new ArrayList<Factor>();
+    public FactorCollection    factors = new FactorCollection();
     
     JFrame_RndVars frameRndVars;
     JFrameFactors  frameFactors;
