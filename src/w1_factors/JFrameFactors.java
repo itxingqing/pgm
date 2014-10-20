@@ -45,6 +45,8 @@ public class JFrameFactors extends javax.swing.JFrame {
     public Map<Factor, JInternalFrame> factorFrame = new HashMap<Factor, JInternalFrame>();
     
     private int frameBorder = 30; //cascade Frame border
+    
+    public JFrameNewFactor frameNewFactor;
             
     //todo get a better gui:
     //  allow resize, move the windows.
@@ -67,6 +69,17 @@ public class JFrameFactors extends javax.swing.JFrame {
         
         this.vars    = vars;
         this.factors = factors;
+        
+        frameNewFactor = new JFrameNewFactor(  );
+        frameNewFactor.setVisible(false);
+        
+        frameNewFactor.getBtnOK().
+            addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OnNewFactorOk(evt);
+            }
+        });
+        
         
     }
 
@@ -697,61 +710,20 @@ public class JFrameFactors extends javax.swing.JFrame {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO test create new factor
-        
+        try
+        {
         System.out.println( "btnNewActionPerformed" );
-        
         System.out.println( "new factor" );
-        
-        Factor f = null;
-        try 
+        frameNewFactor.setId( factors.generateId() );
+        frameNewFactor.setVisible( true );
+        System.out.println( "dialog should be closed" );
+        }
+        catch(Exception e)
         {
-            // show gui
-            JFrameNewFactor fData = new JFrameNewFactor( f, factors.generateId() );
-            fData.setVisible( true );
-            
-            System.out.println( "dialog should be closed" );
-            
-            
-            // put this in an event handler
-            if (f != null )
-            {
-                System.out.println( "factor was created" );
-                
-                System.out.println( "adding frame to desktop" );
-                JifFactor frame = new JifFactor( f.getName() );
-                desktop.add(frame);
-                
-                
-                System.out.println( "adding factor to FactorCollection" );
-                factors.add(f);
-                
-                System.out.println( "filling table" );                
-                f.FillTable();
-                
-                System.out.println( "copying table to frame" );                
-                f.copyTo(frame);
-                
-                
-                System.out.println( "refreshing" );
-                desktop.repaint();
-                this.repaint();
-            }
-            else
-            {
-                System.out.println( "factor is NULL" );
-            }
-                
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println( e.getMessage() );
         }
         finally
-        {
-            System.out.println( "end of New Factors" );
-        }
-        
-
+        {}
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnMarginalizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarginalizationActionPerformed
@@ -864,6 +836,48 @@ public class JFrameFactors extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_jMenuItemTileActionPerformed
 
+    private void OnNewFactorOk(java.awt.event.ActionEvent evt)
+    {
+        frameNewFactor.setVisible(false);
+        try 
+        {
+            
+            Factor f = new Factor( frameNewFactor.getId(), frameNewFactor.getText() );
+
+            //todo: insert variables to factor
+            
+            System.out.println( "factor was created" );
+
+            System.out.println( "adding frame to desktop" );
+            JifFactor frame = new JifFactor( f.getName() );
+            desktop.add(frame);
+
+
+            System.out.println( "adding factor to FactorCollection" );
+            factors.add(f);
+
+            System.out.println( "filling table" );                
+            f.FillTable();
+
+            System.out.println( "copying table to frame" );                
+            f.copyTo(frame);
+
+
+            System.out.println( "refreshing" );
+            desktop.repaint();
+            this.repaint();
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    
+    }
+    
     
     private void cascadert(JDesktopPane d, int border)
     {

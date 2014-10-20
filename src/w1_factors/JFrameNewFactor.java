@@ -10,8 +10,28 @@ package w1_factors;
  * @author Arturo.Alatriste
  */
 public class JFrameNewFactor extends javax.swing.JFrame {
-    Factor factor;
-    int id;
+    //Factor factor;
+    private int id;
+    
+    public int getId()
+    {
+        return id;
+    }
+
+    public int setId(int id)
+    {
+        return this.id = id;
+    }
+
+    public String getText()
+    {
+        return txtName.getText();
+    }
+    
+    public javax.swing.JButton getBtnOK()
+    {
+        return btnOk;
+    }
     
     /**
      * Creates new form JFrameNewFactor
@@ -20,12 +40,14 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFrameNewFactor(Factor factor, int id) {
+/*    public JFrameNewFactor(int id) {
         initComponents();
-        this.factor = factor;
+        //this.factor = factor;
         this.id     = id;
         txtId.setText( Integer.toString(id) );
     }
+  */  
+    
     
     
     /**
@@ -198,7 +220,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        factor = new Factor( id, txtName.getText() );
+        //factor = new Factor( id, txtName.getText() );
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
