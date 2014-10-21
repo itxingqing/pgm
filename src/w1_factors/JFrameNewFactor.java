@@ -1,8 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ **************************************************************************
+ *    _____      ________________
+ *   /  _  \    /  _  \__    ___/
+ *  /  /_\  \  /  /_\  \|    |   
+ * /    |    \/    |    \    |   
+ * \____|__  /\____|__  /____|   
+ *         \/         \/         
+ * 
+ * Description : 
+ * 
+ * Date        : 2014 - October - 13
+ * Author      : Arturo Alatriste Trujillo.
+ ****************************************************************************/
+
 package w1_factors;
 
 /**
@@ -18,9 +34,10 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         return id;
     }
 
-    public int setId(int id)
+    public void setId(int id)
     {
-        return this.id = id;
+        this.id = id;
+        this.txtId.setText( Integer.toString(id) );
     }
 
     public String getText()
@@ -31,6 +48,11 @@ public class JFrameNewFactor extends javax.swing.JFrame {
     public javax.swing.JButton getBtnOK()
     {
         return btnOk;
+    }
+    
+    public javax.swing.JButton getBtnCancel()
+    {
+        return btnCancel;
     }
     
     /**
@@ -198,6 +220,11 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Cancel_48x48.png"))); // NOI18N
         btnCancel.setToolTipText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnCancel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,11 +246,14 @@ public class JFrameNewFactor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
-        //factor = new Factor( id, txtName.getText() );
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

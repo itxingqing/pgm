@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.4
 Created-By: 1.8.0_11-b12 (Oracle Corporation)
 Bundle-Name: w1_factors
-Bundle-Version: 2014.10.20
-Bundle-Date: 2014-10-20 10:52:36 CDT
+Bundle-Version: 2014.10.21
+Bundle-Date: 2014-10-21 17:20:53 CDT
 Implementation-Title: w1_factors
-Implementation-Version: 2014.10.20
+Implementation-Version: 2014.10.21
 Implementation-URL: http://www.example.com
 

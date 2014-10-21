@@ -263,7 +263,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         frameALayout.setVerticalGroup(
             frameALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         frameB.setIconifiable(true);
@@ -325,7 +325,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         frameCLayout.setVerticalGroup(
             frameCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         frameE.setIconifiable(true);
@@ -451,7 +451,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         jInternalFrame4Layout.setVerticalGroup(
             jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -483,16 +483,6 @@ public class JFrameFactors extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(desktopLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(desktopLayout.createSequentialGroup()
-                                .addComponent(jInternalFrame1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jInternalFrame2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jInternalFrame3))
-                            .addComponent(jInternalFrame4)))
-                    .addGroup(desktopLayout.createSequentialGroup()
                         .addComponent(frameB)
                         .addGap(28, 28, 28)
                         .addComponent(frameE)
@@ -501,8 +491,20 @@ public class JFrameFactors extends javax.swing.JFrame {
                     .addGroup(desktopLayout.createSequentialGroup()
                         .addComponent(frameA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(frameC)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(frameC))
+                    .addGroup(desktopLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(desktopLayout.createSequentialGroup()
+                                .addComponent(jInternalFrame4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(desktopLayout.createSequentialGroup()
+                                .addComponent(jInternalFrame1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jInternalFrame2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jInternalFrame3)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         desktop.setLayer(frameA, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(frameB, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -622,7 +624,7 @@ public class JFrameFactors extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -877,7 +879,6 @@ public class JFrameFactors extends javax.swing.JFrame {
         }
     
     }
-    
     
     private void cascadert(JDesktopPane d, int border)
     {

@@ -38,7 +38,7 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
         
   <property name="project.name" value="w1_factors" />
-   <property name="version.num" value="2014.10.20" />
+   <property name="version.num" value="2014.10.21" />
    <tstamp>
       <format property="NOW" pattern="yyyy-MM-dd HH:mm:ss z" />
    </tstamp>
