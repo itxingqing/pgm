@@ -70,7 +70,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         this.vars    = vars;
         this.factors = factors;
         
-        frameNewFactor = new JFrameNewFactor(  );
+        frameNewFactor = new JFrameNewFactor( vars );
         frameNewFactor.setVisible(false);
         
         frameNewFactor.getBtnOK().
@@ -451,7 +451,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         jInternalFrame4Layout.setVerticalGroup(
             jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 476, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -515,12 +515,6 @@ public class JFrameFactors extends javax.swing.JFrame {
         desktop.setLayer(jInternalFrame2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(jInternalFrame4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        try {
-            jInternalFrame4.setIcon(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
 
         jSplitPane1.setRightComponent(desktop);
 
@@ -711,18 +705,17 @@ public class JFrameFactors extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFactorProductActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO test create new factor
         try
         {
-        System.out.println( "btnNewActionPerformed" );
-        System.out.println( "new factor" );
-        frameNewFactor.setId( factors.generateId() );
-        frameNewFactor.setVisible( true );
-        System.out.println( "dialog should be closed" );
+            System.out.println( "btnNewActionPerformed" );
+            System.out.println( "new factor" );
+            frameNewFactor.setId( factors.generateId() );
+            frameNewFactor.setVisible( true );
+            System.out.println( "dialog should be closed" );
         }
         catch(Exception e)
         {
-        System.out.println( e.getMessage() );
+            System.out.println( e.getMessage() );
         }
         finally
         {}
@@ -846,7 +839,12 @@ public class JFrameFactors extends javax.swing.JFrame {
             
             Factor f = new Factor( frameNewFactor.getId(), frameNewFactor.getText() );
 
-            //todo: insert variables to factor
+            //todo: TEST variables in factor
+            
+            for(String s: frameNewFactor.getincludedVars() )
+            {
+                f.getVars().add( vars.getByDescription(s) );
+            }
             
             System.out.println( "factor was created" );
 
@@ -866,6 +864,7 @@ public class JFrameFactors extends javax.swing.JFrame {
 
 
             System.out.println( "refreshing" );
+            frame.setSelected(true);
             desktop.repaint();
             this.repaint();
         } 

@@ -21,13 +21,20 @@
 
 package w1_factors;
 
+import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Arturo.Alatriste
  */
 public class JFrameNewFactor extends javax.swing.JFrame {
-    //Factor factor;
+    private RandomVarCollection vars;
     private int id;
+
+    private DefaultListModel availableVarsModel = new DefaultListModel();
+    private DefaultListModel includedVarsModel  = new DefaultListModel();
     
     public int getId()
     {
@@ -55,13 +62,43 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         return btnCancel;
     }
     
+    
+    public ArrayList<String> getincludedVars()
+    {
+        if (includedVarsModel.size() == 0)
+        {
+            return null;
+        }
+                
+        ArrayList<String> arrayList = new ArrayList<String> ();
+        for(int i=0; i < includedVarsModel.size(); i++)
+        {
+            arrayList.add( includedVarsModel.get(i).toString() );
+        }
+        return arrayList;
+    }
+    
+    public DefaultListModel getincludedVarsModel()
+    {
+        return includedVarsModel;
+    }
+    
+    
+    
     /**
      * Creates new form JFrameNewFactor
      */
+    public JFrameNewFactor(RandomVarCollection vars) {
+        initComponents();
+        this.vars = vars;
+        FillVarsListBox();
+    }
     public JFrameNewFactor() {
         initComponents();
+        
     }
 
+    
 /*    public JFrameNewFactor(int id) {
         initComponents();
         //this.factor = factor;
@@ -69,7 +106,6 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         txtId.setText( Integer.toString(id) );
     }
   */  
-    
     
     
     /**
@@ -120,15 +156,35 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
         btnLeftAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Actions-arrow-left-double-icon.png"))); // NOI18N
         btnLeftAll.setToolTipText("Move all to left");
+        btnLeftAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftAllActionPerformed(evt);
+            }
+        });
 
         btnLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Actions-arrow-left-icon.png"))); // NOI18N
         btnLeft.setToolTipText("move selected vars to left");
+        btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftActionPerformed(evt);
+            }
+        });
 
         btnRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Actions-arrow-right-icon.png"))); // NOI18N
         btnRight.setToolTipText("move selected vars to right");
+        btnRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRightActionPerformed(evt);
+            }
+        });
 
         btnRightAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Actions-arrow-right-double-icon.png"))); // NOI18N
         btnRightAll.setToolTipText("move all to right");
+        btnRightAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRightAllActionPerformed(evt);
+            }
+        });
 
         txtName.setText("NewFactor");
 
@@ -255,6 +311,108 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void btnLeftAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftAllActionPerformed
+
+        for(int i=0; i < includedVarsModel.size() ;i++)
+        {
+            availableVarsModel.addElement( includedVarsModel.getElementAt(i) );
+        }
+        includedVarsModel.removeAllElements();
+    }//GEN-LAST:event_btnLeftAllActionPerformed
+
+    private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
+        for(int i: includedVars.getSelectedIndices() )
+        {
+            availableVarsModel.addElement( includedVarsModel.getElementAt(i) );
+        }
+        int[] selectedIndices = includedVars.getSelectedIndices();
+        for(int i = selectedIndices.length - 1; i >= 0 ; i-- )
+        {
+            includedVarsModel.remove( selectedIndices[ i ] );
+        }
+    }//GEN-LAST:event_btnLeftActionPerformed
+
+    private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
+        for(int i: availableVars.getSelectedIndices() )
+        {
+            includedVarsModel.addElement( availableVarsModel.getElementAt(i) );
+        }
+        int[] selectedIndices = availableVars.getSelectedIndices();
+        for(int i = selectedIndices.length - 1; i >= 0 ; i-- )
+        {
+            availableVarsModel.remove( selectedIndices[ i ] );
+        }
+    }//GEN-LAST:event_btnRightActionPerformed
+
+    private void btnRightAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightAllActionPerformed
+        for(int i=0; i < availableVarsModel.size() ;i++)
+        {
+            includedVarsModel.addElement( availableVarsModel.getElementAt(i) );
+        }
+        availableVarsModel.removeAllElements();
+    }//GEN-LAST:event_btnRightAllActionPerformed
+
+    /**
+     * Move all the items from source to target
+     * @param srcModel DefaultListModel
+     * @param tarModel DefaultListModel
+     */
+    private void MoveAllItems(DefaultListModel srcModel, DefaultListModel tarModel)
+    {
+        for(int i=0; i < srcModel.size() ;i++)
+        {
+            tarModel.addElement( srcModel.getElementAt(i) );
+        }
+        srcModel.removeAllElements();    
+    }
+    
+    /**
+     * Move the selected items from source to target JList and DefaultListModels
+     * @param src      JList
+     * @param srcModel DefaultListModel
+     * @param tarModel DefaultListModel
+     */
+    private void MoveSelectedItems(JList src, DefaultListModel srcModel, DefaultListModel tarModel)
+    {
+        for(int i: src.getSelectedIndices() )
+        {
+            tarModel.addElement( srcModel.getElementAt(i) );
+        }
+        int[] selectedIndices = src.getSelectedIndices();
+        for(int i = selectedIndices.length - 1; i >= 0 ; i-- )
+        {
+            srcModel.remove( selectedIndices[ i ] );
+        }    
+    }
+    
+    /**
+     * Fill the listBox with the available RandomVars
+     */
+    private void FillVarsListBox()
+    {
+        // clean Lists
+        availableVarsModel.removeAllElements();
+        includedVarsModel.removeAllElements();
+        availableVars.setModel( availableVarsModel );
+        includedVars.setModel ( includedVarsModel  );        
+        
+        if( vars == null || vars.size() == 0 )
+        {
+            return;
+        }
+        
+        //RandomVar v;
+        for(int i=0; i < vars.size() ;i++)
+        {
+            availableVarsModel.addElement( vars.get(i).getDescription() );
+            //v = vars.get(i);
+            //listModel.addElement( v.getName() + ", " + v.getDescription()  );
+        }
+        availableVars.repaint();
+        this.repaint();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

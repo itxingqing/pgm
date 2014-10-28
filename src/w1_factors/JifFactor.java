@@ -18,6 +18,7 @@
 
 package w1_factors;
 
+import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
@@ -45,7 +46,9 @@ public class JifFactor extends JInternalFrame
         CreateComponents();
         setTitle( title );
     }
-            
+
+    //todo. Autoresize Table.
+    
     private void CreateComponents()
     {
         //jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -133,13 +136,20 @@ public class JifFactor extends JInternalFrame
         setVisible(true);
         try
         {
-            this.setIcon(true);
+            this.setIcon(false);
             this.setMaximum(true);
+            this.setSelected(true);
         }
         catch(Exception e)
         {
         System.out.println( e.getMessage() );
         }
+        
+        this.setPreferredSize(new Dimension(200,200) );
+        this.setBounds(0, 0, 200, 200);
+        
+        this.show();
+        
         this.repaint();    
         
     }

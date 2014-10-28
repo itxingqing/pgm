@@ -96,6 +96,19 @@ public class RandomVarCollection {
     
    }
 
+   public RandomVar getByDescription(String description ){
+        Optional<RandomVar> opt = vars.stream()
+            .filter( v -> v .getDescription().equals( description ) )
+            .findFirst();
+       
+       if (opt != null && opt.isPresent())
+       {
+           return opt.get();
+       }
+       return null;
+   }
+   
+   
    public RandomVar getById(int id ){
        RandomVar v = null;
        for(int i=0; i < vars.size() ;i++)
