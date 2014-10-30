@@ -21,9 +21,13 @@
 
 package w1_factors;
 
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.DefaultListModel;
+import static javax.swing.TransferHandler.COPY;
 
 /**
  *
@@ -92,20 +96,13 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         initComponents();
         this.vars = vars;
         FillVarsListBox();
+        ini();
     }
     public JFrameNewFactor() {
         initComponents();
-        
+        ini();
     }
 
-    
-/*    public JFrameNewFactor(int id) {
-        initComponents();
-        //this.factor = factor;
-        this.id     = id;
-        txtId.setText( Integer.toString(id) );
-    }
-  */  
     
     
     /**
@@ -152,6 +149,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        availableVars.setDragEnabled(true);
         jScrollPane1.setViewportView(availableVars);
 
         btnLeftAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Actions-arrow-left-double-icon.png"))); // NOI18N
@@ -197,6 +195,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        includedVars.setDragEnabled(true);
         jScrollPane2.setViewportView(includedVars);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -410,6 +409,21 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         }
         availableVars.repaint();
         this.repaint();
+    }
+
+    private void ini()
+    {
+        this.availableVars.setDragEnabled(true);
+        this.includedVars.setDragEnabled(true);
+        
+        this.availableVars.setDropMode( DropMode.ON_OR_INSERT );
+        this.includedVars.setDropMode( DropMode.ON_OR_INSERT );
+        
+        availableVars.setTransferHandler(new ListTransferHandler() );
+        includedVars.setTransferHandler(new ListTransferHandler() );
+        
+
+            
     }
     
     

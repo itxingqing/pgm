@@ -66,6 +66,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton_RndVars = new javax.swing.JButton();
         jButton_Factors = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         solExplorer = new javax.swing.JTree();
@@ -101,6 +102,20 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton_Factors);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Body-Skull-icon.png"))); // NOI18N
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(100, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(100, 50));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         jSplitPane1.setDividerLocation(200);
 
@@ -248,6 +263,12 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_solExplorerMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JFrame_UT f = new JFrame_UT();
+        f.setVisible(true); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void solExplorerDoubleClick(DefaultMutableTreeNode node)
     {
         switch( node.getUserObject().toString() )
@@ -341,6 +362,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Factors;
     private javax.swing.JButton jButton_RndVars;
     private javax.swing.JScrollPane jScrollPane1;

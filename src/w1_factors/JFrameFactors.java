@@ -263,7 +263,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         frameALayout.setVerticalGroup(
             frameALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
         );
 
         frameB.setIconifiable(true);
@@ -295,7 +295,7 @@ public class JFrameFactors extends javax.swing.JFrame {
             frameBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frameBLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 53, Short.MAX_VALUE))
+                .addGap(0, 72, Short.MAX_VALUE))
         );
 
         frameC.setIconifiable(true);
@@ -325,7 +325,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         frameCLayout.setVerticalGroup(
             frameCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         frameE.setIconifiable(true);
@@ -387,7 +387,7 @@ public class JFrameFactors extends javax.swing.JFrame {
             frameDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frameDLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE))
         );
 
         jInternalFrame1.setIconifiable(true);
@@ -451,7 +451,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         jInternalFrame4Layout.setVerticalGroup(
             jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 476, Short.MAX_VALUE)
+            .addGap(0, 504, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -489,22 +489,22 @@ public class JFrameFactors extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(frameD))
                     .addGroup(desktopLayout.createSequentialGroup()
-                        .addComponent(frameA)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(frameA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(frameC))
                     .addGroup(desktopLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(desktopLayout.createSequentialGroup()
                                 .addComponent(jInternalFrame4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 30, Short.MAX_VALUE))
                             .addGroup(desktopLayout.createSequentialGroup()
                                 .addComponent(jInternalFrame1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jInternalFrame2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jInternalFrame3)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         desktop.setLayer(frameA, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(frameB, javax.swing.JLayeredPane.DEFAULT_LAYER);

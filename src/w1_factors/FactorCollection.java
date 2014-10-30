@@ -4,6 +4,22 @@
  * and open the template in the editor.
  */
 
+/**
+ **************************************************************************
+ *    _____      ________________
+ *   /  _  \    /  _  \__    ___/
+ *  /  /_\  \  /  /_\  \|    |   
+ * /    |    \/    |    \    |   
+ * \____|__  /\____|__  /____|   
+ *         \/         \/         
+ * 
+ * Description : Factorcollection is a collection of Factors
+ * 
+ * Date        : 2014 - October - 13
+ * Author      : Arturo Alatriste Trujillo.
+ ****************************************************************************/
+
+
 package w1_factors;
 
 import java.lang.Integer;

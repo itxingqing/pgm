@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.4
 Created-By: 1.8.0_11-b12 (Oracle Corporation)
-Bundle-Name: w1_factors. Show new factor table
-Bundle-Version: 2014.10.28
-Bundle-Date: 2014-10-28 12:02:14 CST
-Implementation-Title: w1_factors. Show new factor table
-Implementation-Version: 2014.10.28
+Bundle-Name: bug, drag n drop join items in new factor
+Bundle-Version: 2014.10.30
+Bundle-Date: 2014-10-30 17:32:20 CST
+Implementation-Title: bug, drag n drop join items in new factor
+Implementation-Version: 2014.10.30
 Implementation-URL: http://www.example.com
 

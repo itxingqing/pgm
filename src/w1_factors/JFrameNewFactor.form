@@ -160,6 +160,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
+                <Property name="dragEnabled" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -241,6 +242,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
+                <Property name="dragEnabled" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>
