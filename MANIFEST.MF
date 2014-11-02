@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.8.0_05-b13 (Oracle Corporation)
+Bundle-Name: new factor OK
+Bundle-Version: 2014.11.01
+Bundle-Date: 2014-11-02 08:51:37 CST
+Implementation-Title: new factor OK
+Implementation-Version: 2014.11.01
+Implementation-URL: http://www.example.com
+

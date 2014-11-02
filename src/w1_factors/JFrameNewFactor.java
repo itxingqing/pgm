@@ -133,7 +133,6 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("New Factor");
         setMinimumSize(new java.awt.Dimension(0, 57));
 
@@ -217,7 +216,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnLeftAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRightAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -419,8 +418,8 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         this.availableVars.setDropMode( DropMode.ON_OR_INSERT );
         this.includedVars.setDropMode( DropMode.ON_OR_INSERT );
         
-        availableVars.setTransferHandler(new ListTransferHandler() );
-        includedVars.setTransferHandler(new ListTransferHandler() );
+        availableVars.setTransferHandler( new ListTransferHandler() );
+        includedVars .setTransferHandler( new ListTransferHandler() );
         
 
             

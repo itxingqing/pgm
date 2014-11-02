@@ -78,6 +78,11 @@ public class Factor {
      */
     protected JTable                table;
 
+    /**
+     * specify which varAttribute will be used as headerColumnName in the JTable.
+     */
+    protected String                headerColumnName = "description";
+    
     // Attributes get set
     
     /**
@@ -150,7 +155,7 @@ public class Factor {
         this.table = table;
     }
     
-   
+    
     // Constructors
     public Factor(int id, String name)
     {
@@ -186,6 +191,7 @@ public class Factor {
         JTablex.copy(getTable(), t);
     }
 
+    
     /**
      * copy the table to a visual control JifFactor
      * @param frame 
@@ -316,6 +322,29 @@ public class Factor {
         getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
                 .setHeaderValue( "probability" );
     }
+    
+    public void setHeaders(String varAttribute)
+    {
+        
+        if ( varAttribute.toLowerCase().equals("description") )
+        {
+            for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+            {
+                getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getDescription() );
+            }        
+        }
+        else
+        {
+            for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+            {
+                getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getName() );
+            }        
+        
+        }
+        
+        getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
+                .setHeaderValue( "probability" );
+    }    
 
     /**
      * create an empty table with the maximum of rows needed.
@@ -327,7 +356,17 @@ public class Factor {
             setTable(new JTable(0, getVars().size() + 1 ));
         }
         JTablex.deleteRows(getTable());
-        setHeaders();
+        
+        if ( headerColumnName == null  )
+        {
+            setHeaders();
+        }
+        else
+        {
+            setHeaders( headerColumnName );
+        }
+        
+        
         
         int rows = 0;
         for(int i=0; i < getVars().size(); i++)

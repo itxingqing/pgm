@@ -34,14 +34,15 @@ package w1_factors;
 /*
  * ListTransferHandler.java is used by the DropDemo example.
  */
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;
+import java.util.ArrayList;
+import javax.swing.*;
 
 public class ListTransferHandler extends TransferHandler {
-    private int[] indices = null;
-    private int addIndex = -1; //Location where items were added
-    private int addCount = 0;  //Number of items added.
+    protected int[] indices = null;
+    protected int addIndex = -1; //Location where items were added
+    protected int addCount = 0;  //Number of items added.
             
     public boolean canImport(TransferHandler.TransferSupport info) {
         // Check for String flavor
@@ -79,10 +80,22 @@ public class ListTransferHandler extends TransferHandler {
         catch (Exception e) { return false; }
                                 
         // Perform the actual import.  
-        if (insert) {
-            listModel.add(index, data);
-        } else {
-            listModel.set(index, data);
+        if (insert) 
+        {
+            //listModel.add(index, data);
+            // Fixed by AAT.
+            for( String s: data.split("\n") )
+            {
+                listModel.add( listModel.getSize(), s); 
+            }
+        } else 
+        {
+            //listModel.set(index, data);
+            // Fixed by AAT.
+            for( String s: data.split("\n") )
+            {
+                listModel.set( listModel.getSize(), s); 
+            }
         }
         return true;
     }
@@ -96,14 +109,20 @@ public class ListTransferHandler extends TransferHandler {
     protected String exportString(JComponent c) {
         JList list = (JList)c;
         indices = list.getSelectedIndices();
-        Object[] values = list.getSelectedValues();
+        //Object[] values = list..getSelectedValues();
+        
+        ArrayList<String> values = (ArrayList<String>) list.getSelectedValuesList();
         
         StringBuffer buff = new StringBuffer();
 
-        for (int i = 0; i < values.length; i++) {
-            Object val = values[i];
+        //for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < values.size(); i++) {
+            //Object val = values[i];
+            
+            String val = values.get(i);
             buff.append(val == null ? "" : val.toString());
-            if (i != values.length - 1) {
+            //if (i != values.length - 1) {
+            if (i != values.size() - 1) {
                 buff.append("\n");
             }
         }
