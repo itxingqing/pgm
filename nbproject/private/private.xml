@@ -12,10 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ojodecocodrilo/prg/pgm/src/w1_factors/RandomVar.java</file>
-            <file>file:/home/ojodecocodrilo/prg/pgm/src/w1_factors/JTablex.java</file>
-            <file>file:/home/ojodecocodrilo/prg/pgm/src/w1_factors/FactorCollection.java</file>
-            <file>file:/home/ojodecocodrilo/prg/pgm/src/w1_factors/Factor.java</file>
+            <file>file:/home/ojodecocodrilo/prg/pgm/MANIFEST.MF</file>
+            <file>file:/home/ojodecocodrilo/prg/pgm/manifest.mf</file>
+            <file>file:/home/ojodecocodrilo/prg/pgm/src/w1_factors/JFrameFactorProduct.java</file>
             <file>file:/home/ojodecocodrilo/prg/pgm/nbproject/build-impl.xml</file>
         </group>
     </open-files>
