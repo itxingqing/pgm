@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.2
 Created-By: 1.8.0_05-b13 (Oracle Corporation)
-Bundle-Name: factor product gui - design
-Bundle-Version: 2014.11.03
-Bundle-Date: 2014-11-04 00:31:42 CST
-Implementation-Title: factor product gui - design
-Implementation-Version: 2014.11.03
+Bundle-Name: factor product gui - show
+Bundle-Version: 2014.11.07
+Bundle-Date: 2014-11-07 06:22:30 CST
+Implementation-Title: factor product gui - show
+Implementation-Version: 2014.11.07
 Implementation-URL: http://www.example.com
 

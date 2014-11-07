@@ -46,8 +46,9 @@ public class JFrameFactors extends javax.swing.JFrame {
     
     private int frameBorder = 30; //cascade Frame border
     
-    public JFrameNewFactor frameNewFactor;
-            
+    public JFrameNewFactor     frameNewFactor;
+    public JFrameFactorProduct frameFactorProduct;
+    
     //todo get a better gui:
     //  allow resize, move the windows.
     // http://docs.oracle.com/javase/tutorial/uiswing/components/internalframe.html
@@ -80,7 +81,8 @@ public class JFrameFactors extends javax.swing.JFrame {
             }
         });
         
-        
+        frameFactorProduct = new JFrameFactorProduct();
+        frameFactorProduct.setVisible(false);
     }
 
     /**
@@ -692,6 +694,9 @@ public class JFrameFactors extends javax.swing.JFrame {
 
     private void btnFactorProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorProductActionPerformed
 
+        frameFactorProduct.setVisible( true );
+        
+        /* Unit Test
         // C = A * B
         Factor factorC = Factor.FactorProduct( factors.get(0) , factors.get(1) );
         factorC.print();
@@ -701,7 +706,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         factorC.copyTo(tFactorC);
         factors.add(factorC);
         this.repaint();
-        
+        */
     }//GEN-LAST:event_btnFactorProductActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
