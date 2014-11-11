@@ -80,17 +80,17 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel_f3" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Factor2" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_Factor1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_f2" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_f1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1" max="32767" attributes="0"/>
-                              <Component id="jComboBox2" min="-2" pref="451" max="-2" attributes="0"/>
+                              <Component id="jComboBox_f1" max="32767" attributes="0"/>
+                              <Component id="jComboBox_f2" min="-2" pref="451" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -104,16 +104,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="33" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Factor1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBox_f1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_f1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Factor2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBox_f2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_f2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel_f3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="lbl_Desc" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBox_f1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -134,7 +134,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="jComboBox_f2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -146,12 +146,12 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_Factor1">
+        <Component class="javax.swing.JLabel" name="lbl_f1">
           <Properties>
             <Property name="text" type="java.lang.String" value="factor1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_Factor2">
+        <Component class="javax.swing.JLabel" name="lbl_f2">
           <Properties>
             <Property name="text" type="java.lang.String" value="factor2"/>
           </Properties>
@@ -163,7 +163,7 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jPanel_f3">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -186,18 +186,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbl_Factor3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lbl_f3Name" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_f3Id" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtFactor3Description" max="32767" attributes="0"/>
-                          <Component id="txtFactor3Name" pref="415" max="32767" attributes="0"/>
+                          <Component id="txt_f3Id" max="32767" attributes="0"/>
+                          <Component id="txt_f3Name" pref="415" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
@@ -208,13 +203,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtFactor3Description" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_Factor3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_f3Id" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_f3Id" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtFactor3Name" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_f3Name" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_f3Name" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
@@ -222,19 +217,19 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbl_Factor3">
+            <Component class="javax.swing.JLabel" name="lbl_f3Id">
               <Properties>
-                <Property name="text" type="java.lang.String" value="description"/>
+                <Property name="text" type="java.lang.String" value="Id"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lbl_f3Name">
               <Properties>
                 <Property name="text" type="java.lang.String" value="name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFactor3Description">
+            <Component class="javax.swing.JTextField" name="txt_f3Id">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFactor3Name">
+            <Component class="javax.swing.JTextField" name="txt_f3Name">
             </Component>
           </SubComponents>
         </Container>

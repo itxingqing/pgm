@@ -81,7 +81,7 @@ public class JFrameFactors extends javax.swing.JFrame {
             }
         });
         
-        frameFactorProduct = new JFrameFactorProduct();
+        frameFactorProduct = new JFrameFactorProduct( factors );
         frameFactorProduct.setVisible(false);
     }
 
@@ -694,6 +694,7 @@ public class JFrameFactors extends javax.swing.JFrame {
 
     private void btnFactorProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorProductActionPerformed
 
+        frameFactorProduct.FillComboBoxes();
         frameFactorProduct.setVisible( true );
         
         /* Unit Test
