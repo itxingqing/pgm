@@ -1,10 +1,12 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.2
 Created-By: 1.8.0_05-b13 (Oracle Corporation)
-Bundle-Name: factor product gui - comboBoxes
-Bundle-Version: 2014.11.11
-Bundle-Date: 2014-11-11 06:36:42 CST
-Implementation-Title: factor product gui - comboBoxes
-Implementation-Version: 2014.11.11
+Bundle-Name: Frame NewFactor makes Factor instances, FrameFactors make
+ s frames in gui 
+Bundle-Version: 2014.12.01
+Bundle-Date: 2014-12-01 01:21:39 CST
+Implementation-Title: Frame NewFactor makes Factor instances, FrameFac
+ tors makes frames in gui 
+Implementation-Version: 2014.12.01
 Implementation-URL: http://www.example.com
 

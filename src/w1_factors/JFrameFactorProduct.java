@@ -27,12 +27,60 @@ package w1_factors;
  *
  * @author ojodecocodrilo
  */
-public class JFrameFactorProduct extends javax.swing.JFrame {
+public class JFrameFactorProduct 
+    extends javax.swing.JFrame 
 
-    FactorCollection factors;
+{
+
+    private FactorCollection factors;
+    private int              id;
+    private Factor           newFactor;
     
-        public JFrameFactorProduct() 
-        {}
+    public JFrameFactorProduct() 
+    {}
+    
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+        this.txtId.setText( Integer.toString(id) );
+    }
+
+    public String getText()
+    {
+        return txtName.getText();
+    }
+    
+    public javax.swing.JButton getBtnOK()
+    {
+        return btnOK;
+    }
+    
+    public javax.swing.JButton getBtnCancel()
+    {
+        return btnCancel;
+    }
+
+    public Factor getFactor1()
+    {
+        Factor f = factors.get( this.jComboBox_f1.getSelectedIndex() );
+        return f;
+    }
+
+    public Factor getFactor2()
+    {
+        Factor f = factors.get( this.jComboBox_f2.getSelectedIndex() );
+        return f;
+    }
+    
+    public Factor getNewFactor()
+    {
+        return newFactor;
+    }
     
     /**
      * Creates new form JFrameFactorProduct
@@ -53,7 +101,7 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        btnOk = new javax.swing.JButton();
+        btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jComboBox_f1 = new javax.swing.JComboBox();
@@ -64,24 +112,24 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
         jPanel_f3 = new javax.swing.JPanel();
         lbl_f3Id = new javax.swing.JLabel();
         lbl_f3Name = new javax.swing.JLabel();
-        txt_f3Id = new javax.swing.JTextField();
-        txt_f3Name = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToolBar1.setRollover(true);
 
-        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Check_48x48.png"))); // NOI18N
-        btnOk.setToolTipText("OK");
-        btnOk.setFocusable(false);
-        btnOk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOk.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
+        btnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Check_48x48.png"))); // NOI18N
+        btnOK.setToolTipText("OK");
+        btnOK.setFocusable(false);
+        btnOK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnOK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
+                btnOKActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnOk);
+        jToolBar1.add(btnOK);
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Cancel_48x48.png"))); // NOI18N
         btnCancel.setToolTipText("Cancel");
@@ -123,8 +171,8 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
                     .addComponent(lbl_f3Id, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_f3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_f3Id)
-                    .addComponent(txt_f3Name, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
+                    .addComponent(txtId)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel_f3Layout.setVerticalGroup(
@@ -132,11 +180,11 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
             .addGroup(jPanel_f3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_f3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_f3Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_f3Id))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_f3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_f3Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_f3Name))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -200,10 +248,27 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    /**
+     * initialize the vars and clean the gui
+     */
+    public void ini()
+    {
+        FillComboBoxes();
+        this.txtId.setText( "" );
+        this.txtName.setText( "" );
+        newFactor = null;
+    }
+    
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+
+        Factor factor3 = Factor.FactorProduct( 
+                factors.get( jComboBox_f1.getSelectedIndex() ) , 
+                factors.get( jComboBox_f1.getSelectedIndex() ) );
+        
+        newFactor = factor3;
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_btnOkActionPerformed
+    }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
@@ -218,17 +283,11 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
         jComboBox_f1.removeAllItems();
         jComboBox_f2.removeAllItems();
         
-        
         for( int i = 0; i < factors.size(); i++  )
         {
             jComboBox_f1.addItem(  factors.get(i).getName() );
             jComboBox_f2.addItem(  factors.get(i).getName() );
         }
-        
-        
-        
-        
-        
     }
     
     /**
@@ -268,7 +327,7 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnOK;
     private javax.swing.JComboBox jComboBox_f1;
     private javax.swing.JComboBox jComboBox_f2;
     private javax.swing.JPanel jPanel1;
@@ -279,7 +338,7 @@ public class JFrameFactorProduct extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_f2;
     private javax.swing.JLabel lbl_f3Id;
     private javax.swing.JLabel lbl_f3Name;
-    private javax.swing.JTextField txt_f3Id;
-    private javax.swing.JTextField txt_f3Name;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

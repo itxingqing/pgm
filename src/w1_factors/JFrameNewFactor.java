@@ -25,9 +25,13 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.DefaultListModel;
 import static javax.swing.TransferHandler.COPY;
+import javax.swing.event.EventListenerList;
 
 /**
  *
@@ -39,7 +43,11 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
     private DefaultListModel availableVarsModel = new DefaultListModel();
     private DefaultListModel includedVarsModel  = new DefaultListModel();
+
+    //protected EventListenerList listeners = new EventListenerList();
+    protected ArrayList<FactorEventListener> listeners = new ArrayList<FactorEventListener> ();
     
+   
     public int getId()
     {
         return id;
@@ -58,7 +66,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
     
     public javax.swing.JButton getBtnOK()
     {
-        return btnOk;
+        return btnOK;
     }
     
     public javax.swing.JButton getBtnCancel()
@@ -130,7 +138,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         includedVars = new javax.swing.JList();
         jToolBar1 = new javax.swing.JToolBar();
-        btnOk = new javax.swing.JButton();
+        btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
         setTitle("New Factor");
@@ -260,17 +268,17 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Check_48x48.png"))); // NOI18N
-        btnOk.setToolTipText("OK");
-        btnOk.setFocusable(false);
-        btnOk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOk.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
+        btnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Check_48x48.png"))); // NOI18N
+        btnOK.setToolTipText("OK");
+        btnOK.setFocusable(false);
+        btnOK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnOK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
+                btnOKActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnOk);
+        jToolBar1.add(btnOK);
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Cancel_48x48.png"))); // NOI18N
         btnCancel.setToolTipText("Cancel");
@@ -299,10 +307,43 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+    
+        try
+        {
+            Factor f = createFactor();
+            FactorCreated factorCreated = new FactorCreated(f);
+            for(FactorEventListener h: listeners )
+            {
+                h.FactorCreated(factorCreated);
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            System.out.println( ex.getMessage() );
+        }
+        finally
+        {}
+        
+        /*
+        Object[] listeners = listeners[1].  .getListenerList();
+        for (int i = 0; i < listeners.length; i = i+2) 
+        {
+          if (listeners[i] == FactorEventListener.class) 
+          {
+            ((FactorEventListener) listeners[i+1]).FactorCreated(null);
+          }
+        }*/
+        
+        for(FactorEventListener h: listeners )
+        {
+            h.FactorCreated(null);
+        }
+        
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_btnOkActionPerformed
+    }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
@@ -410,6 +451,38 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         this.repaint();
     }
 
+    public void addFactorEventListener( FactorEventListener listener) {
+    listeners.add( listener );
+      }
+    
+    public void removeFactorEventListener(FactorEventListener listener) {
+      listeners.remove(listener);
+    }    
+  
+    public Factor createFactor() throws Exception
+    {
+        try 
+        {
+            Factor f = new Factor( this.getId(), this.getText() );
+
+            for(String s: this.getincludedVars() )
+            {
+                f.getVars().add( vars.getByDescription(s) );
+            }
+            f.FillTable();
+            return f;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+            throw new Exception(ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    }    
+    
     private void ini()
     {
         this.availableVars.setDragEnabled(true);
@@ -466,7 +539,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnLeftAll;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnOK;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnRightAll;
     private javax.swing.JList includedVars;

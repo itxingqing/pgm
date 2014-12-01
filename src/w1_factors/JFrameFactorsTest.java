@@ -59,7 +59,7 @@ public class JFrameFactorsTest {
         f.setVisible(true);
         
         
-        f.LoadSample();
+        f.LoadSamples();
         //f.test1();
         
         //f.TestSetHeader();

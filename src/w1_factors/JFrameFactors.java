@@ -19,9 +19,27 @@
  * Author      : Arturo Alatriste Trujillo.
  ****************************************************************************/
 
+/**
+ **************************************************************************
+ *    _____      ________________
+ *   /  _  \    /  _  \__    ___/
+ *  /  /_\  \  /  /_\  \|    |   
+ * /    |    \/    |    \    |   
+ * \____|__  /\____|__  /____|   
+ *         \/         \/         
+ * 
+ * Description : GUI for Factors
+ * Date        : 2014 - July - 24
+ * Author      : Arturo Alatriste Trujillo.
+ ****************************************************************************/
+
+
+
+
 package w1_factors;
 
-import java.awt.*;
+
+//import java.awt.*;
 import java.awt.Component;
 import java.util.*;
 import java.util.ArrayList;
@@ -31,11 +49,16 @@ import javax.swing.*;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
 
+
 /**
  *
  * @author Arturo.Alatriste
  */
-public class JFrameFactors extends javax.swing.JFrame {
+public class JFrameFactors 
+    extends    javax.swing.JFrame 
+    implements FactorEventListener 
+
+{
 
     public RandomVarCollection vars = new RandomVarCollection();
     
@@ -73,16 +96,31 @@ public class JFrameFactors extends javax.swing.JFrame {
         
         frameNewFactor = new JFrameNewFactor( vars );
         frameNewFactor.setVisible(false);
-        
-        frameNewFactor.getBtnOK().
+    
+/*        frameNewFactor.getBtnOK().
             addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+  
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OnNewFactorOk(evt);
             }
         });
+        */
+        
+        
+        frameNewFactor.addFactorEventListener(this);
+        
         
         frameFactorProduct = new JFrameFactorProduct( factors );
         frameFactorProduct.setVisible(false);
+   /*     frameFactorProduct.getBtnOK().
+            addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OnFactorProductOk(evt);
+            }
+        });*/
+
+        
+        //frameFactorProduct.getBtnOK
     }
 
     /**
@@ -179,7 +217,7 @@ public class JFrameFactors extends javax.swing.JFrame {
             }
         });
 
-        btnTest.setText("test Load sample2");
+        btnTest.setText("test 1");
         btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestActionPerformed(evt);
@@ -204,7 +242,7 @@ public class JFrameFactors extends javax.swing.JFrame {
                         .addComponent(btnTest, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnFactorProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                            .addComponent(btnFactorProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, Short.MAX_VALUE))
                         .addComponent(btnLoadSamples))
                     .addComponent(btnMarginalization)
                     .addComponent(btnReduction))
@@ -265,7 +303,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         frameALayout.setVerticalGroup(
             frameALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
         );
 
         frameB.setIconifiable(true);
@@ -401,7 +439,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 66, Short.MAX_VALUE)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,7 +491,7 @@ public class JFrameFactors extends javax.swing.JFrame {
         );
         jInternalFrame4Layout.setVerticalGroup(
             jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -499,7 +537,7 @@ public class JFrameFactors extends javax.swing.JFrame {
                         .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(desktopLayout.createSequentialGroup()
                                 .addComponent(jInternalFrame4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 30, Short.MAX_VALUE))
+                                .addGap(0, 19, Short.MAX_VALUE))
                             .addGroup(desktopLayout.createSequentialGroup()
                                 .addComponent(jInternalFrame1)
                                 .addGap(18, 18, 18)
@@ -627,10 +665,14 @@ public class JFrameFactors extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void LoadSample()
+    /**
+     * A simple test. Load a factor in frameA and insert the factor in the 
+     * FactorCollection called factors.
+     */
+    public void LoadSamples()
     {
         tFactorA.setValueAt( "Hola", 0, 0);
-        Factor factor;
+        Factor factorA;
         
         
         ArrayList<RandomVar> varsA = new ArrayList<RandomVar>();
@@ -638,17 +680,21 @@ public class JFrameFactors extends javax.swing.JFrame {
         varsA.add( vars.getByName("v2") );
         varsA.add( vars.getByName("v3") );
         
-        factor = new Factor( 0, "FactorA", varsA );
-        factorFrame.put(factor, frameA);
+        factorA = new Factor( 0, "FactorA", varsA );
+        factorFrame.put(factorA, frameA);
         
-        factor.FillTable();
-        factor.print();
-        factor.copyTo(tFactorA);
+        factorA.FillTable();
+        factorA.print();
+        factorA.copyTo(tFactorA);
+        
+        factors.add( factorA );
+        
         this.repaint();
     }
     
     /**
-     * Load sample 2. small factors: A, B.
+     * Test 1. small factors: A, B.
+     * Clear the FactorCollection factors and insert A & B.
      */
     public void test1()
     {
@@ -677,10 +723,10 @@ public class JFrameFactors extends javax.swing.JFrame {
         factors.add( factorA );
         factors.add( factorB );
     }
-    
+
     
     private void btnLoadSamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadSamplesActionPerformed
-        LoadSample();        
+        LoadSamples();        
     }//GEN-LAST:event_btnLoadSamplesActionPerformed
 
     private void btnCopyBtoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyBtoAActionPerformed
@@ -694,7 +740,7 @@ public class JFrameFactors extends javax.swing.JFrame {
 
     private void btnFactorProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorProductActionPerformed
 
-        frameFactorProduct.FillComboBoxes();
+        frameFactorProduct.ini();
         frameFactorProduct.setVisible( true );
         
         /* Unit Test
@@ -837,27 +883,24 @@ public class JFrameFactors extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_jMenuItemTileActionPerformed
 
+    
+    //todo remove code that Create Factors from here, and put it in proper the frame.
     private void OnNewFactorOk(java.awt.event.ActionEvent evt)
     {
         frameNewFactor.setVisible(false);
         try 
         {
-            
             Factor f = new Factor( frameNewFactor.getId(), frameNewFactor.getText() );
-
-            //todo: TEST variables in factor
-            
+           
             for(String s: frameNewFactor.getincludedVars() )
             {
                 f.getVars().add( vars.getByDescription(s) );
             }
             
             System.out.println( "factor was created" );
-
             System.out.println( "adding frame to desktop" );
             JifFactor frame = new JifFactor( f.getName() );
             desktop.add(frame);
-
 
             System.out.println( "adding factor to FactorCollection" );
             factors.add(f);
@@ -881,6 +924,63 @@ public class JFrameFactors extends javax.swing.JFrame {
         finally
         {
             System.out.println( "end of New Factors" );
+        }
+    }
+
+    @Override
+    public void FactorCreated(FactorCreated evt)
+    {
+        //frameNewFactor.setVisible(false);
+        try 
+        {
+            factors.add( evt.f );
+            System.out.println( "adding frame to desktop" );
+            JifFactor frame = new JifFactor( evt.f.getName() );
+            desktop.add( frame );
+
+
+            System.out.println( "adding factor to FactorCollection" );
+            factors.add( evt.f );
+
+            System.out.println( "filling table" );                
+            evt.f.FillTable();
+
+            System.out.println( "copying table to frame" );                
+            evt.f.copyTo(frame);
+
+
+            System.out.println( "refreshing" );
+            frame.setSelected(true);
+            desktop.repaint();
+            this.repaint();
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    
+    }
+    
+    private void OnFactorProductOk(java.awt.event.ActionListener evt )
+    {
+        frameFactorProduct.setVisible(false);
+        try 
+        {
+            
+            desktop.repaint();
+            this.repaint();
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            System.out.println( "end of FactorProduct" );
         }
     
     }
@@ -1082,8 +1182,6 @@ public class JFrameFactors extends javax.swing.JFrame {
             }
         }
     }
-    
-    
     
     /**
      * set the proper headers in the JTable using the random variables 
