@@ -96,7 +96,8 @@ public class JFrameFactors
         
         frameNewFactor = new JFrameNewFactor( vars );
         frameNewFactor.setVisible(false);
-    
+        frameNewFactor.addNewFactorListener(this);
+        
 /*        frameNewFactor.getBtnOK().
             addActionListener(new java.awt.event.ActionListener() {
   
@@ -107,11 +108,13 @@ public class JFrameFactors
         */
         
         
-        frameNewFactor.addFactorEventListener(this);
+        
         
         
         frameFactorProduct = new JFrameFactorProduct( factors );
         frameFactorProduct.setVisible(false);
+        frameFactorProduct.addNewFactorListener(this);
+        
    /*     frameFactorProduct.getBtnOK().
             addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,10 +160,6 @@ public class JFrameFactors
         frameD = new javax.swing.JInternalFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
         tFactorD = new javax.swing.JTable();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jInternalFrame3 = new javax.swing.JInternalFrame();
-        jInternalFrame4 = new javax.swing.JInternalFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -303,7 +302,7 @@ public class JFrameFactors
         );
         frameALayout.setVerticalGroup(
             frameALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
 
         frameB.setIconifiable(true);
@@ -365,7 +364,7 @@ public class JFrameFactors
         );
         frameCLayout.setVerticalGroup(
             frameCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
         );
 
         frameE.setIconifiable(true);
@@ -430,70 +429,6 @@ public class JFrameFactors
                 .addGap(0, 70, Short.MAX_VALUE))
         );
 
-        jInternalFrame1.setIconifiable(true);
-        jInternalFrame1.setMaximizable(true);
-        jInternalFrame1.setTitle("6");
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jInternalFrame2.setIconifiable(true);
-        jInternalFrame2.setMaximizable(true);
-        jInternalFrame2.setTitle("7");
-        jInternalFrame2.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jInternalFrame3.setIconifiable(true);
-        jInternalFrame3.setMaximizable(true);
-        jInternalFrame3.setTitle("8");
-        jInternalFrame3.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame3Layout = new javax.swing.GroupLayout(jInternalFrame3.getContentPane());
-        jInternalFrame3.getContentPane().setLayout(jInternalFrame3Layout);
-        jInternalFrame3Layout.setHorizontalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame3Layout.setVerticalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jInternalFrame4.setIconifiable(true);
-        jInternalFrame4.setMaximizable(true);
-        jInternalFrame4.setTitle("9");
-        jInternalFrame4.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame4Layout = new javax.swing.GroupLayout(jInternalFrame4.getContentPane());
-        jInternalFrame4.getContentPane().setLayout(jInternalFrame4Layout);
-        jInternalFrame4Layout.setHorizontalGroup(
-            jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
-        );
-        jInternalFrame4Layout.setVerticalGroup(
-            jInternalFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
@@ -508,14 +443,7 @@ public class JFrameFactors
                     .addComponent(frameB)
                     .addComponent(frameE)
                     .addComponent(frameD))
-                .addGap(28, 28, 28)
-                .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jInternalFrame1)
-                    .addComponent(jInternalFrame2)
-                    .addComponent(jInternalFrame3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jInternalFrame4)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(499, Short.MAX_VALUE))
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,19 +459,7 @@ public class JFrameFactors
                     .addGroup(desktopLayout.createSequentialGroup()
                         .addComponent(frameA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(frameC))
-                    .addGroup(desktopLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(desktopLayout.createSequentialGroup()
-                                .addComponent(jInternalFrame4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 19, Short.MAX_VALUE))
-                            .addGroup(desktopLayout.createSequentialGroup()
-                                .addComponent(jInternalFrame1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jInternalFrame2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jInternalFrame3)))))
+                        .addComponent(frameC)))
                 .addGap(20, 20, 20))
         );
         desktop.setLayer(frameA, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -551,10 +467,6 @@ public class JFrameFactors
         desktop.setLayer(frameC, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(frameE, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktop.setLayer(frameD, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        desktop.setLayer(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        desktop.setLayer(jInternalFrame2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        desktop.setLayer(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        desktop.setLayer(jInternalFrame4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jSplitPane1.setRightComponent(desktop);
 
@@ -773,6 +685,8 @@ public class JFrameFactors
         {}
     }//GEN-LAST:event_btnNewActionPerformed
 
+    
+    //todo Marginalization GUI
     private void btnMarginalizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarginalizationActionPerformed
         // factorD = Marginalize C, scope(v1, v3 )
         // it means, delete column v2
@@ -791,9 +705,10 @@ public class JFrameFactors
         
     }//GEN-LAST:event_btnMarginalizationActionPerformed
 
+    
+    // todo: Reduction GUI
+
     private void btnReductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReductionActionPerformed
-        
-        // todo: create Reduction condition gui
         
         MarClauseSet cluseSet = new MarClauseSet();
         cluseSet.add( vars.get( 2 ) , "C");
@@ -884,8 +799,7 @@ public class JFrameFactors
     }//GEN-LAST:event_jMenuItemTileActionPerformed
 
     
-    //todo remove code that Create Factors from here, and put it in proper the frame.
-    private void OnNewFactorOk(java.awt.event.ActionEvent evt)
+    /*private void OnNewFactorOk(java.awt.event.ActionEvent evt)
     {
         frameNewFactor.setVisible(false);
         try 
@@ -926,44 +840,6 @@ public class JFrameFactors
             System.out.println( "end of New Factors" );
         }
     }
-
-    @Override
-    public void FactorCreated(FactorCreated evt)
-    {
-        //frameNewFactor.setVisible(false);
-        try 
-        {
-            factors.add( evt.f );
-            System.out.println( "adding frame to desktop" );
-            JifFactor frame = new JifFactor( evt.f.getName() );
-            desktop.add( frame );
-
-
-            System.out.println( "adding factor to FactorCollection" );
-            factors.add( evt.f );
-
-            System.out.println( "filling table" );                
-            evt.f.FillTable();
-
-            System.out.println( "copying table to frame" );                
-            evt.f.copyTo(frame);
-
-
-            System.out.println( "refreshing" );
-            frame.setSelected(true);
-            desktop.repaint();
-            this.repaint();
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
-            System.out.println( "end of New Factors" );
-        }
-    
-    }
     
     private void OnFactorProductOk(java.awt.event.ActionListener evt )
     {
@@ -984,6 +860,45 @@ public class JFrameFactors
         }
     
     }
+*/
+    
+    @Override
+    public void OnFactorCreated(FactorCreated evt)
+    {
+        //frameNewFactor.setVisible(false);
+        try 
+        {
+            factors.add( evt.f );
+            System.out.println( "adding frame to desktop" );
+            JifFactor frame = new JifFactor( evt.f.getName() );
+            desktop.add( frame );
+
+
+            System.out.println( "adding factor to FactorCollection" );
+            factors.add( evt.f );
+/*
+            System.out.println( "filling table" );                
+            evt.f.FillTable();*/
+
+            System.out.println( "copying table to frame" );                
+            evt.f.copyTo(frame);
+
+            System.out.println( "refreshing" );
+            frame.setSelected(true);
+            desktop.repaint();
+            this.repaint();
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    
+    }
+    
     
     private void cascadert(JDesktopPane d, int border)
     {
@@ -1254,10 +1169,6 @@ public class JFrameFactors
     private javax.swing.JInternalFrame frameC;
     private javax.swing.JInternalFrame frameD;
     private javax.swing.JInternalFrame frameE;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JInternalFrame jInternalFrame3;
-    private javax.swing.JInternalFrame jInternalFrame4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

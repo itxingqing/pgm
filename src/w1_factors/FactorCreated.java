@@ -19,6 +19,7 @@ public class FactorCreated extends EventObject
     public FactorCreated( Object source )
     {
         super( source );
+        f = (Factor) source;
     }
     
 }

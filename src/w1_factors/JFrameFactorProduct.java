@@ -23,18 +23,24 @@
 
 package w1_factors;
 
+import java.util.ArrayList;
+import javax.swing.event.EventListenerList;
+
+
 /**
  *
  * @author ojodecocodrilo
  */
 public class JFrameFactorProduct 
     extends javax.swing.JFrame 
-
+    implements INewFactorHandler
 {
 
     private FactorCollection factors;
     private int              id;
     private Factor           newFactor;
+    protected ArrayList<FactorEventListener> listeners = new ArrayList<FactorEventListener> ();
+
     
     public JFrameFactorProduct() 
     {}
@@ -55,6 +61,7 @@ public class JFrameFactorProduct
         return txtName.getText();
     }
     
+    /*
     public javax.swing.JButton getBtnOK()
     {
         return btnOK;
@@ -64,6 +71,7 @@ public class JFrameFactorProduct
     {
         return btnCancel;
     }
+    */
 
     public Factor getFactor1()
     {
@@ -260,12 +268,24 @@ public class JFrameFactorProduct
     }
     
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-
+        try
+        {
+            Factor f = createFactor();
+            FactorCreated factorCreated = new FactorCreated(f);
+            OnFactorCreated(factorCreated);
+        }
+        catch(Exception ex)
+        {
+            System.out.println( ex.getMessage() );
+        }
+        finally
+        {}
+        /*
         Factor factor3 = Factor.FactorProduct( 
                 factors.get( jComboBox_f1.getSelectedIndex() ) , 
                 factors.get( jComboBox_f1.getSelectedIndex() ) );
         
-        newFactor = factor3;
+        newFactor = factor3;*/
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
@@ -275,6 +295,49 @@ public class JFrameFactorProduct
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    @Override
+    public void addNewFactorListener(FactorEventListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeNewFactorListener(FactorEventListener listener) {
+        listeners.remove(listener);
+    }
+    
+    @Override
+    public void OnFactorCreated( FactorCreated evt)
+    {
+        for(FactorEventListener h: listeners )
+        {
+            h.OnFactorCreated(evt);
+        }
+    }
+    
+    public Factor createFactor() throws Exception
+    {
+        try 
+        {
+            Factor f = Factor.FactorProduct( 
+                    factors.get( jComboBox_f1.getSelectedIndex() ) , 
+                    factors.get( jComboBox_f2.getSelectedIndex() ) );
+            
+            f.setId( this.getId() );
+            f.setName( this.getName() );
+
+            return f;
+        } 
+        catch (Exception ex) 
+        {
+            throw new Exception(ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    }    
+    
+    
     /**
      * Fill the ComboBoxes with the factor names
      */

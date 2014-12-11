@@ -15,6 +15,6 @@ import java.util.EventListener;
 public interface FactorEventListener 
 extends EventListener
 {
-    public void FactorCreated( FactorCreated evt );
+    public void OnFactorCreated( FactorCreated evt );
     
 }

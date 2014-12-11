@@ -1,12 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.2
 Created-By: 1.8.0_05-b13 (Oracle Corporation)
-Bundle-Name: Frame NewFactor makes Factor instances, FrameFactors make
- s frames in gui 
-Bundle-Version: 2014.12.01
-Bundle-Date: 2014-12-01 01:21:39 CST
-Implementation-Title: Frame NewFactor makes Factor instances, FrameFac
- tors makes frames in gui 
-Implementation-Version: 2014.12.01
+Bundle-Name: listener n handler - newFactor, FactorProduct
+Bundle-Version: 2014.12.11
+Bundle-Date: 2014-12-11 03:32:57 CST
+Implementation-Title: listener n handler - newFactor, FactorProduct
+Implementation-Version: 2014.12.11
 Implementation-URL: http://www.example.com
 

@@ -37,7 +37,10 @@ import javax.swing.event.EventListenerList;
  *
  * @author Arturo.Alatriste
  */
-public class JFrameNewFactor extends javax.swing.JFrame {
+public class JFrameNewFactor 
+    extends javax.swing.JFrame 
+    implements INewFactorHandler
+{
     private RandomVarCollection vars;
     private int id;
 
@@ -46,7 +49,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
 
     //protected EventListenerList listeners = new EventListenerList();
     protected ArrayList<FactorEventListener> listeners = new ArrayList<FactorEventListener> ();
-    
+    //protected EventListenerList listenerList = new EventListenerList();
    
     public int getId()
     {
@@ -64,6 +67,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         return txtName.getText();
     }
     
+    /*
     public javax.swing.JButton getBtnOK()
     {
         return btnOK;
@@ -73,7 +77,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
     {
         return btnCancel;
     }
-    
+    */
     
     public ArrayList<String> getincludedVars()
     {
@@ -111,6 +115,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         ini();
     }
 
+    
     
     
     /**
@@ -313,11 +318,7 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         {
             Factor f = createFactor();
             FactorCreated factorCreated = new FactorCreated(f);
-            for(FactorEventListener h: listeners )
-            {
-                h.FactorCreated(factorCreated);
-            }
-            
+            OnFactorCreated(factorCreated);
         }
         catch(Exception ex)
         {
@@ -336,10 +337,13 @@ public class JFrameNewFactor extends javax.swing.JFrame {
           }
         }*/
         
+        /*
         for(FactorEventListener h: listeners )
         {
-            h.FactorCreated(null);
+            h.OnFactorCreated(null);
         }
+        */
+        
         
         this.setVisible(false);
         this.dispose();
@@ -391,6 +395,58 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         availableVarsModel.removeAllElements();
     }//GEN-LAST:event_btnRightAllActionPerformed
 
+    
+    @Override
+    public void addNewFactorListener(FactorEventListener listener) {
+        listeners.add(listener);
+      //listenerList.add(FactorEventListener.class, listener);
+    }
+
+    @Override
+    public void removeNewFactorListener(FactorEventListener listener) {
+        listeners.remove(listener);
+      //listenerList.remove(FactorEventListener.class, listener);
+    }
+
+    /**
+     * notify the event to all listener 
+     * @param evt 
+     */  
+    
+    @Override
+    public void OnFactorCreated( FactorCreated evt)
+    {
+        for(FactorEventListener h: listeners )
+        {
+            h.OnFactorCreated(evt);
+        }
+    }
+
+    public Factor createFactor() throws Exception
+    {
+        try 
+        {
+            Factor f = new Factor( this.getId(), this.getText() );
+
+            for(String s: this.getincludedVars() )
+            {
+                f.getVars().add( vars.getByDescription(s) );
+            }
+            f.FillTable();
+            return f;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+            throw new Exception(ex);
+        }
+        finally
+        {
+            System.out.println( "end of New Factors" );
+        }
+    }    
+    
+    
     /**
      * Move all the items from source to target
      * @param srcModel DefaultListModel
@@ -451,37 +507,16 @@ public class JFrameNewFactor extends javax.swing.JFrame {
         this.repaint();
     }
 
+    /*
     public void addFactorEventListener( FactorEventListener listener) {
     listeners.add( listener );
       }
     
     public void removeFactorEventListener(FactorEventListener listener) {
       listeners.remove(listener);
-    }    
+    } 
+    */
   
-    public Factor createFactor() throws Exception
-    {
-        try 
-        {
-            Factor f = new Factor( this.getId(), this.getText() );
-
-            for(String s: this.getincludedVars() )
-            {
-                f.getVars().add( vars.getByDescription(s) );
-            }
-            f.FillTable();
-            return f;
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
-            throw new Exception(ex);
-        }
-        finally
-        {
-            System.out.println( "end of New Factors" );
-        }
-    }    
     
     private void ini()
     {
