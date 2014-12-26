@@ -528,9 +528,6 @@ public class JFrameNewFactor
         
         availableVars.setTransferHandler( new ListTransferHandler() );
         includedVars .setTransferHandler( new ListTransferHandler() );
-        
-
-            
     }
     
     

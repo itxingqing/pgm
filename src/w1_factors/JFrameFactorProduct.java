@@ -42,9 +42,6 @@ public class JFrameFactorProduct
     protected ArrayList<FactorEventListener> listeners = new ArrayList<FactorEventListener> ();
 
     
-    public JFrameFactorProduct() 
-    {}
-    
     public int getId()
     {
         return id;
@@ -89,6 +86,9 @@ public class JFrameFactorProduct
     {
         return newFactor;
     }
+
+    public JFrameFactorProduct() 
+    {}    
     
     /**
      * Creates new form JFrameFactorProduct
@@ -123,7 +123,7 @@ public class JFrameFactorProduct
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Factor Product");
 
         jToolBar1.setRollover(true);
 

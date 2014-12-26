@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.DropMode;
 
 /**
  *
@@ -19,7 +20,8 @@ public class JFrameMarginalization
     extends javax.swing.JFrame 
     implements INewFactorHandler
 {
-
+    private FactorCollection factors;
+    //private Factor           factor;
     private RandomVarCollection vars;
     private int id;
 
@@ -40,6 +42,13 @@ public class JFrameMarginalization
     public JFrameMarginalization() {
         initComponents();
     }
+    
+    public JFrameMarginalization(FactorCollection factors) {
+        initComponents();
+        this.factors = factors;
+        ini();
+    }    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,11 +74,13 @@ public class JFrameMarginalization
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         includedVars = new javax.swing.JList();
+        jLabel_templateFactor = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Marginalization");
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setForeground(new java.awt.Color(102, 153, 255));
@@ -132,22 +143,32 @@ public class JFrameMarginalization
         includedVars.setDragEnabled(true);
         jScrollPane2.setViewportView(includedVars);
 
+        jLabel_templateFactor.setText("template factor");
+        jLabel_templateFactor.setName(""); // NOI18N
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName)
                             .addComponent(txtId)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,20 +181,28 @@ public class JFrameMarginalization
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_templateFactor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_templateFactor)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -188,7 +217,7 @@ public class JFrameMarginalization
                         .addComponent(btnRight)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRightAll))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -209,6 +238,8 @@ public class JFrameMarginalization
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/w1_factors/icons/Cancel_48x48.png"))); // NOI18N
         btnCancel.setToolTipText("Cancel");
+        btnCancel.setFocusable(false);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -299,6 +330,10 @@ public class JFrameMarginalization
         availableVarsModel.removeAllElements();
     }//GEN-LAST:event_btnRightAllActionPerformed
 
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        this.FillVarsListBox();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
 
     public int getId()
     {
@@ -362,6 +397,24 @@ public class JFrameMarginalization
     }
     
     
+    public void ini()
+    {
+        FillComboBox();
+        this.txtId.setText( "" );
+        this.txtName.setText( "" );
+
+        this.availableVars.setDragEnabled(true);
+        this.includedVars.setDragEnabled(true);
+        
+        this.availableVars.setDropMode( DropMode.ON_OR_INSERT );
+        this.includedVars.setDropMode( DropMode.ON_OR_INSERT );
+        
+        availableVars.setTransferHandler( new ListTransferHandler() );
+        includedVars .setTransferHandler( new ListTransferHandler() );
+    }
+    
+    
+    
     public Factor createFactor() throws Exception
     {
         try 
@@ -386,6 +439,50 @@ public class JFrameMarginalization
         }
     }    
 
+    public void FillComboBox()
+    {
+        jComboBox1.removeAllItems();
+        
+        for( int i = 0; i < factors.size(); i++  )
+        {
+            jComboBox1.addItem(  factors.get(i).getName() );
+        }
+    }
+    
+    private void FillVarsListBox()
+    {
+        try
+        {
+            // clean Lists
+            availableVarsModel.removeAllElements();
+            includedVarsModel.removeAllElements();
+            availableVars.setModel( availableVarsModel );
+            includedVars.setModel ( includedVarsModel  );        
+
+            //todo get selected factor
+            Factor f = factors.get( jComboBox1.getSelectedIndex() );
+            vars = f.getVars();
+
+            if( vars == null || vars.size() == 0 )
+            {
+                return;
+            }
+
+            //RandomVar v;
+            for(int i=0; i < vars.size() ;i++)
+            {
+                availableVarsModel.addElement( vars.get(i).getDescription() );
+            }
+            availableVars.repaint();
+            this.repaint();
+        }
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
+    }    
     
     /**
      * @param args the command line arguments
@@ -431,10 +528,12 @@ public class JFrameMarginalization
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnRightAll;
     private javax.swing.JList includedVars;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel_templateFactor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

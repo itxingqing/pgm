@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.9.2
-Created-By: 1.8.0_05-b13 (Oracle Corporation)
-Bundle-Name: Marginalization frame - building
-Bundle-Version: 2014.12.25
-Bundle-Date: 2014-12-25 23:00:42 CST
-Implementation-Title: Marginalization frame - building
-Implementation-Version: 2014.12.25
+Ant-Version: Apache Ant 1.9.4
+Created-By: 1.8.0_11-b12 (Oracle Corporation)
+Bundle-Name: Marginalization frame - running
+Bundle-Version: 2014.12.26
+Bundle-Date: 2014-12-26 15:29:46 CST
+Implementation-Title: Marginalization frame - running
+Implementation-Version: 2014.12.26
 Implementation-URL: http://www.example.com
+

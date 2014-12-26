@@ -69,8 +69,9 @@ public class JFrameFactors
     
     private int frameBorder = 30; //cascade Frame border
     
-    public JFrameNewFactor     frameNewFactor;
-    public JFrameFactorProduct frameFactorProduct;
+    public JFrameNewFactor       frameNewFactor;
+    public JFrameFactorProduct   frameFactorProduct;
+    public JFrameMarginalization frameMarginalization;
     
     //todo get a better gui:
     //  allow resize, move the windows.
@@ -122,6 +123,9 @@ public class JFrameFactors
             }
         });*/
 
+        frameMarginalization = new JFrameMarginalization( factors );
+        frameMarginalization.setVisible( true );
+        frameMarginalization.addNewFactorListener(this);
         
         //frameFactorProduct.getBtnOK
     }
@@ -688,6 +692,10 @@ public class JFrameFactors
     
     //todo Marginalization GUI
     private void btnMarginalizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarginalizationActionPerformed
+    
+        frameMarginalization.ini();
+        frameMarginalization.setVisible( true );
+/*
         // factorD = Marginalize C, scope(v1, v3 )
         // it means, delete column v2
         
@@ -702,7 +710,7 @@ public class JFrameFactors
         factorFrame.put( factorD, frameD );
         factorD.copyTo( tFactorD );
         factors.add(factorD);
-        
+  */      
     }//GEN-LAST:event_btnMarginalizationActionPerformed
 
     
