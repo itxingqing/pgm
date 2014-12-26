@@ -37,8 +37,8 @@ is divided into following sections:
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
         
-  <property name="project.name" value="listener n handler - newFactor, FactorProduct" />
-   <property name="version.num" value="2014.12.11" />
+  <property name="project.name" value="Marginalization frame - building" />
+   <property name="version.num" value="2014.12.25" />
    <tstamp>
       <format property="NOW" pattern="yyyy-MM-dd HH:mm:ss z" />
    </tstamp>

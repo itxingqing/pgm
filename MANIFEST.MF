@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.2
 Created-By: 1.8.0_05-b13 (Oracle Corporation)
-Bundle-Name: listener n handler - newFactor, FactorProduct
-Bundle-Version: 2014.12.11
-Bundle-Date: 2014-12-11 03:32:57 CST
-Implementation-Title: listener n handler - newFactor, FactorProduct
-Implementation-Version: 2014.12.11
+Bundle-Name: Marginalization frame - building
+Bundle-Version: 2014.12.25
+Bundle-Date: 2014-12-25 23:00:42 CST
+Implementation-Title: Marginalization frame - building
+Implementation-Version: 2014.12.25
 Implementation-URL: http://www.example.com
 
