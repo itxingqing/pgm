@@ -384,9 +384,6 @@ public class JFrameMarginalization
       //listenerList.remove(FactorEventListener.class, listener);
     }
     
-    
-    
-    
     @Override
     public void OnFactorCreated( FactorCreated evt)
     {
@@ -459,7 +456,7 @@ public class JFrameMarginalization
             availableVars.setModel( availableVarsModel );
             includedVars.setModel ( includedVarsModel  );        
 
-            //todo get selected factor
+            //get selected factor
             Factor f = factors.get( jComboBox1.getSelectedIndex() );
             vars = f.getVars();
 
