@@ -9,6 +9,7 @@ package w1_factors;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 
@@ -33,9 +34,6 @@ public class JFrameMarginalization
     //protected EventListenerList listenerList = new EventListenerList();
     
 
-    //todo code and test Marginalization frame
-    
-    
     /**
      * Creates new form JFrameMarginalization
      */
@@ -457,7 +455,10 @@ public class JFrameMarginalization
             includedVars.setModel ( includedVarsModel  );        
 
             //get selected factor
-            Factor f = factors.get( jComboBox1.getSelectedIndex() );
+            //Factor f = factors.get( jComboBox1.getSelectedIndex() );
+            
+            Factor f = factors.getByName( jComboBox1.getSelectedItem().toString() );
+            
             vars = f.getVars();
 
             if( vars == null || vars.size() == 0 )

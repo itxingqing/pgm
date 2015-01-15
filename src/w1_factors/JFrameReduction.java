@@ -8,7 +8,10 @@ package w1_factors;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DropMode;
+import javax.swing.JComboBox;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -52,15 +55,14 @@ public class JFrameReduction
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel_templateFactor = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox_Factors = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setForeground(new java.awt.Color(102, 153, 255));
@@ -74,10 +76,10 @@ public class JFrameReduction
         jLabel_templateFactor.setText("template factor");
         jLabel_templateFactor.setName(""); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        jComboBox_Factors.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_Factors.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                jComboBox_FactorsItemStateChanged(evt);
             }
         });
 
@@ -89,10 +91,13 @@ public class JFrameReduction
                 {null, null, null, null}
             },
             new String [] {
-                "bool op", "variable", "operator", "value"
+                "Cond Operator", "variable", "Eq Rel Operator", "value"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("SELECT rows that satisfy the next conditions");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +118,10 @@ public class JFrameReduction
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel_templateFactor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, 582, Short.MAX_VALUE)))
+                        .addComponent(jComboBox_Factors, 0, 582, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,10 +138,12 @@ public class JFrameReduction
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_templateFactor)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_Factors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         jToolBar1.setRollover(true);
@@ -190,9 +200,9 @@ public class JFrameReduction
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+    private void jComboBox_FactorsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_FactorsItemStateChanged
        
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_jComboBox_FactorsItemStateChanged
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
@@ -263,31 +273,83 @@ public class JFrameReduction
         FillComboBox();
         this.txtId.setText( "" );
         this.txtName.setText( "" );
+        FillTableComboBoxes();
+        
     }
+    
+    private void FillTableComboBoxes()
+    {
+        try
+        {
+            //set comboBox for Column "Bool Operator"
+            JComboBox cb_Bop = new JComboBox();
+            cb_Bop.addItem( "AND" );
+            cb_Bop.addItem( "OR" );
+
+            TableColumn bOpColumn = jTable1.getColumnModel().getColumn( 0 );
+            bOpColumn.setCellEditor( new DefaultCellEditor( cb_Bop ) );
+
+            //set combobox for column variable
+            JComboBox cb_Var = new JComboBox();
+            
+            if (factors == null)
+            {
+                return ;
+            }
+           
+            Factor f = factors.getByName( this.jComboBox_Factors.getSelectedItem().toString() );
+
+            for( int i = 0; i < f.getVars().size(); i++ )
+            {
+                cb_Var.addItem( f.getVars().get( i ).getDescription() );
+            }
+
+            TableColumn varColumn = jTable1.getColumnModel().getColumn( 1 );
+            varColumn.setCellEditor( new DefaultCellEditor( cb_Var ) );
+
+            // set combobox for column "Relational Operator"
+            JComboBox cb_Rop = new JComboBox();
+            cb_Rop.addItem( "=" );
+            cb_Rop.addItem( "!=" );
+            cb_Rop.addItem( "in" );
+            cb_Rop.addItem( ">" );
+            cb_Rop.addItem( "<" );
+            cb_Rop.addItem( ">=" );
+            cb_Rop.addItem( "<=" );
+
+            TableColumn rOpColumn = jTable1.getColumnModel().getColumn( 2 );
+            rOpColumn.setCellEditor( new DefaultCellEditor( cb_Rop ) );
+
+        }
+        catch( Exception e )
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
+    
+    }
+    
+    
     
     /**
      * Fill the comboBox for that has a list of Factors
      */    
     public void FillComboBox()
     {
-        jComboBox1.removeAllItems();
+        jComboBox_Factors.removeAllItems();
         for( int i = 0; i < factors.size(); i++  )
         {
-            jComboBox1.addItem(  factors.get(i).getName() );
+            jComboBox_Factors.addItem(  factors.get(i).getName() );
         }
     }    
     
+
+    //todo Reduction: evaluator
+    // Condition
     
-    /**
-     * Fill the comboBoxes for the Conditions table. Prepare the Columns such as
-     *   boolean Operator: and or
-     *   arithmetic operator: =  !=  in   "not in" < <= > >=
-     *   value:
-     */
-    protected void FillTableColumns()
-    {
-      //todo prepare columns comboboxes
-    }
+    //todo Reduction: 
+    
     
     public Factor createFactor() throws Exception
     {
@@ -295,6 +357,17 @@ public class JFrameReduction
         {
             Factor f = new Factor( this.getId(), this.getText() );
 
+            // evaluator.CleanConditions
+            // evaluator.InsertConditions( jTableDataModel )
+            
+            // loop Originalfactor rows
+                
+                // rowValues = get values ( row )
+            
+                //if evaluate( row, rowValues ) == true
+                //{ f.addRow( row ) }            
+            
+            
             /*
             for(String s: this.getincludedVars() )
             {
@@ -356,9 +429,10 @@ public class JFrameReduction
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox_Factors;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_templateFactor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

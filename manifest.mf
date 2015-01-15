@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.4
 Created-By: 1.8.0_11-b12 (Oracle Corporation)
-Bundle-Name: Reduction gui 1 - empty
-Bundle-Version: 2015.01.07
-Bundle-Date: 2015-01-07 15:58:30 CST
-Implementation-Title: Reduction gui 1 - empty
-Implementation-Version: 2015.01.07
+Bundle-Name: Reduction gui 1 - table comboboxes
+Bundle-Version: 2015.01.15
+Bundle-Date: 2015-01-15 17:10:31 CST
+Implementation-Title: Reduction gui 1 - table comboboxes
+Implementation-Version: 2015.01.15
 Implementation-URL: http://www.example.com
 

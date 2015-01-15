@@ -72,6 +72,7 @@ public class JFrameFactors
     public JFrameNewFactor       frameNewFactor;
     public JFrameFactorProduct   frameFactorProduct;
     public JFrameMarginalization frameMarginalization;
+    public JFrameReduction       frameReduction;
     
     //todo get a better gui:
     //  allow resize, move the windows.
@@ -124,10 +125,15 @@ public class JFrameFactors
         });*/
 
         frameMarginalization = new JFrameMarginalization( factors );
-        frameMarginalization.setVisible( true );
+        frameMarginalization.setVisible( false );
         frameMarginalization.addNewFactorListener(this);
-        
         //frameFactorProduct.getBtnOK
+        
+        frameReduction = new JFrameReduction( factors );
+        frameReduction.setVisible( false );
+        frameReduction.addNewFactorListener(this);
+        
+        
     }
 
     /**
@@ -689,8 +695,6 @@ public class JFrameFactors
         {}
     }//GEN-LAST:event_btnNewActionPerformed
 
-    
-    //todo Marginalization GUI
     private void btnMarginalizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarginalizationActionPerformed
     
         frameMarginalization.ini();
@@ -718,6 +722,12 @@ public class JFrameFactors
 
     private void btnReductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReductionActionPerformed
         
+        frameReduction.ini();
+        frameReduction.setVisible(true);
+        
+        
+        
+        /*
         MarClauseSet cluseSet = new MarClauseSet();
         cluseSet.add( vars.get( 2 ) , "C");
         
@@ -727,7 +737,7 @@ public class JFrameFactors
         factorFrame.put( factorE, frameE );
         factorE.copyTo( tFactorE );
         factors.add( factorE );
-        
+        */
     }//GEN-LAST:event_btnReductionActionPerformed
 
     private void jMenuItemMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMinActionPerformed
