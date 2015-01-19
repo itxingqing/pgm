@@ -609,6 +609,7 @@ public class JFrameFactors
         factorA.print();
         factorA.copyTo(tFactorA);
         
+        factors.clear();
         factors.add( factorA );
         
         this.repaint();

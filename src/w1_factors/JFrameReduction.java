@@ -6,11 +6,13 @@
 package w1_factors;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 /**
@@ -24,6 +26,8 @@ public class JFrameReduction
     private FactorCollection factors;
     protected ArrayList<FactorEventListener> listeners = new ArrayList<FactorEventListener> ();    
     private int id;
+    
+    FEvaluator evaluator = new FEvaluator();
     
     
     /**
@@ -57,7 +61,7 @@ public class JFrameReduction
         jLabel_templateFactor = new javax.swing.JLabel();
         jComboBox_Factors = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Conditions = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btnOK = new javax.swing.JButton();
@@ -83,18 +87,15 @@ public class JFrameReduction
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Conditions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
                 "Cond Operator", "variable", "Eq Rel Operator", "value"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_Conditions);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("SELECT rows that satisfy the next conditions");
@@ -286,7 +287,7 @@ public class JFrameReduction
             cb_Bop.addItem( "AND" );
             cb_Bop.addItem( "OR" );
 
-            TableColumn bOpColumn = jTable1.getColumnModel().getColumn( 0 );
+            TableColumn bOpColumn = jTable_Conditions.getColumnModel().getColumn( 0 );
             bOpColumn.setCellEditor( new DefaultCellEditor( cb_Bop ) );
 
             //set combobox for column variable
@@ -304,7 +305,7 @@ public class JFrameReduction
                 cb_Var.addItem( f.getVars().get( i ).getDescription() );
             }
 
-            TableColumn varColumn = jTable1.getColumnModel().getColumn( 1 );
+            TableColumn varColumn = jTable_Conditions.getColumnModel().getColumn( 1 );
             varColumn.setCellEditor( new DefaultCellEditor( cb_Var ) );
 
             // set combobox for column "Relational Operator"
@@ -312,12 +313,14 @@ public class JFrameReduction
             cb_Rop.addItem( "=" );
             cb_Rop.addItem( "!=" );
             cb_Rop.addItem( "in" );
+            cb_Rop.addItem( "not in" );
+            
             cb_Rop.addItem( ">" );
             cb_Rop.addItem( "<" );
             cb_Rop.addItem( ">=" );
             cb_Rop.addItem( "<=" );
 
-            TableColumn rOpColumn = jTable1.getColumnModel().getColumn( 2 );
+            TableColumn rOpColumn = jTable_Conditions.getColumnModel().getColumn( 2 );
             rOpColumn.setCellEditor( new DefaultCellEditor( cb_Rop ) );
 
         }
@@ -350,22 +353,86 @@ public class JFrameReduction
     
     //todo Reduction: 
     
+    private void setConditions()
+    {
+        try
+        {
+            evaluator.CleanConditions();
+
+            for( int r=0; r < jTable_Conditions.getRowCount(); r++ )
+            {
+                FCondition condition = new FCondition();
+
+                if (jTable_Conditions.getValueAt(r, 0) != null) 
+                    condition.setBoolOperator ( jTable_Conditions.getValueAt(r, 0).toString() );
+                
+                if (jTable_Conditions.getValueAt(r, 1) != null) 
+                    condition.setvarDecription(jTable_Conditions.getValueAt(r, 1).toString() );
+                
+                if (jTable_Conditions.getValueAt(r, 2) != null) 
+                    condition.setRelOperator  ( jTable_Conditions.getValueAt(r, 2).toString() );
+                
+                if (jTable_Conditions.getValueAt(r, 3) != null) 
+                    condition.setValues       ( jTable_Conditions.getValueAt(r, 3).toString() );
+
+                if ( !condition.isEmpty() )
+                {
+                    evaluator.addCondition( condition );
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
+    }
     
     public Factor createFactor() throws Exception
     {
         try 
         {
             Factor f = new Factor( this.getId(), this.getText() );
+            setConditions();
+            
+            // factor used as base, as reference.
+            Factor baseFactor = factors.getByName( this.jComboBox_Factors.getSelectedItem().toString() );
+            //JTable baseT = baseFactor.getTable();
+            
+            Hashtable<String, String> values = new Hashtable<String, String>();
+            String varDesc;
 
-            // evaluator.CleanConditions
-            // evaluator.InsertConditions( jTableDataModel )
             
-            // loop Originalfactor rows
+            for(int r=0; r < baseFactor.getRowCount(); r++ )
+            {
+                // get varValues from baseFactor Row
+                values.clear();
+                //for(int i = 0; i < jTable_Conditions.getRowCount(); i++ )
+                for(int i = 0; i < evaluator.getConditionsCount(); i++ )
+                {
+                    
+                   varDesc = evaluator.getConditions().get( i ).getVarDecription();
+                           //jTable_Conditions.getValueAt(i, 1).toString();
+                           
+                    if ( baseFactor.getVars().getByDescription( varDesc ) != null )
+                    {                
+                        values.put( varDesc, // varDescription
+                                    baseFactor.getCell(r, varDesc) ); // var value
+                    }
+                }
+                evaluator.setValues(values);
                 
-                // rowValues = get values ( row )
+                // add row to new factor
+                if (evaluator.Evaluate( ) == true )
+                { 
+                    f.addRow( baseFactor, r );
+                }            
+                
+            }
             
-                //if evaluate( row, rowValues ) == true
-                //{ f.addRow( row ) }            
+            
+            
             
             
             /*
@@ -379,7 +446,8 @@ public class JFrameReduction
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(JFrameFactors.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println( ex.getMessage() );
             throw new Exception(ex);
         }
         finally
@@ -436,7 +504,7 @@ public class JFrameReduction
     private javax.swing.JLabel jLabel_templateFactor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Conditions;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;

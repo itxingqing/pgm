@@ -144,6 +144,21 @@ public class JTablex {
         }
     }
     
-
+    //verify if exist a column header with that name
+    public static boolean existColumn(JTable t, String columnHeader)
+    {
+    String s;
+    
+    for ( int c = 0; c < t.getColumnCount(); c++ )
+    {
+        s = (String) t.getColumnModel().getColumn( c  ).getHeaderValue();
+        
+        if (s.equals( columnHeader ) )
+        {
+            return true;
+        }
+    }
+        return false;
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package w1_factors;
 
+
 import java.util.*;
 import java.util.ArrayList;
 
@@ -17,19 +18,109 @@ import java.util.ArrayList;
 public class FEvaluator {
     
     private ArrayList<FCondition> conditions;
-    private Hastable values;
+    
+    private Hashtable<String, String> values;
 
     //constructor
-    public FEvaluator( ArrayList<FCondition> conditions, Hastable values )
+    public FEvaluator( )
     {
+        conditions = new ArrayList<FCondition>();
+    }
     
+    
+    public void CleanConditions()
+    {
+        conditions.clear();
     }
     
     public boolean Evaluate()
     {
-    return true;
+        boolean result = true;
+        boolean b      = true;
+        FCondition c;
+        
+        try
+        {
+            for( int i = 0; i < conditions.size(); i++ )
+            {
+                c = conditions.get( i );
+
+                // relational operator
+                switch( c.getRelOperator() )
+                {
+                    case "="  : b = c.getValue().equals( values.get( c.getVarDecription() ) ) ; 
+                                break;
+
+                    case "!=" : b = !c.getValue().equals( values.get( c.getVarDecription() ) ) ; 
+                                break;
+
+                    case "in" : b = c.containValue( values.get( c.getVarDecription() ) );
+                                break;
+
+                    case "not in" : b = !c.containValue( values.get( c.getVarDecription() ) );
+                                break;                    
+
+                    case ">"  : break;
+                    case "<"  : break;
+                    case ">="  : break;
+                    case "<="  : break;
+                }
+            
+                if ( i == 0 )
+                {
+                    result = b;
+                }
+                else 
+                {
+                    switch( c.getBoolOperator() )
+                    {
+                        case "AND" : result = result && b; break;
+                        case "OR"  : result = result || b; break;
+                    }
+                }
+            }
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
+        
+        return result;
+    }
+
+    public void addCondition( FCondition condition )
+    {
+        this.conditions.add(condition);
     }
     
+    public ArrayList<FCondition> getConditions()
+    {
+        return this.conditions;
+    }
+    
+    public int getConditionsCount()
+    {
+        if (this.conditions == null)
+        {
+            return 0;
+        }
+        
+        return this.conditions.size();
+    }
+    
+    
+    public void setConditions( ArrayList<FCondition> conditions )
+    {
+        this.conditions = conditions;
+    }
 
+    public void setValues( Hashtable<String, String> values )
+    {
+        this.values = values;
+    }
+    
     
 }

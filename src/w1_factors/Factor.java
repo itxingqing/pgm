@@ -278,6 +278,26 @@ public class Factor {
         return vars.get( varIndex ).getId();
     }
     
+    public int getRowCount()
+    {
+        try
+        {
+            if (table == null )
+            {
+                return 0;
+            }
+            return table.getRowCount();
+        }
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+            return 0;
+        }
+        finally
+        {}
+    }
+    
+    
     /**
      * Add a row at the end of the JTable of this Factor
      * @param fA   Factor
@@ -287,7 +307,7 @@ public class Factor {
      *              value = index of column from this factor 
      * 
      */
-    public void AddRow( Factor fA, int rowA, HashMap<Integer, Integer> mapAB )
+    public void addRow( Factor fA, int rowA, HashMap<Integer, Integer> mapAB )
     {
         JTablex.addRow( this.table );
         
@@ -298,15 +318,32 @@ public class Factor {
         }
     }
     
-    public void AddRow( Factor fA, int rowA )
+    public void addRow( Factor fA, int rowA )
     {
-        JTablex.addRow( this.table );
-        
-        for( int c = 0; c < this.table.getColumnCount(); c++ )
+        try
+            
         {
-            getTable().setValueAt( fA.getCell(rowA, c ), 
-                this.table.getRowCount()-1, c );
+            if (this.table == null)
+            {
+                this.table = new JTable();
+            }
+            
+            JTablex.addRow( this.table );
+
+            for( int c = 0; c < this.table.getColumnCount(); c++ )
+            {
+                getTable().setValueAt( fA.getCell(rowA, c ), 
+                    this.table.getRowCount()-1, c );
+            }
+        
         }
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
+                
     }
     
     
@@ -581,7 +618,7 @@ public class Factor {
             
             if ( !matchRow )
             {
-                fM.AddRow( f, r, mapfM );
+                fM.addRow( f, r, mapfM );
                 fM.setProbability( f.getProbability(r) , fM.table.getRowCount()-1 );
             }
         }
@@ -701,7 +738,7 @@ public class Factor {
             
             if ( !matchRow )
             {
-                fM.AddRow( f, r );
+                fM.addRow( f, r );
                 fM.setProbability( f.getProbability(r) , fM.table.getRowCount()-1 );
             }
         }
