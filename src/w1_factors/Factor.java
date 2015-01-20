@@ -348,39 +348,56 @@ public class Factor {
     
     
     /**
-     * add columns and set the  headers to table.
+     * add columns and set the  headers to VariableName.
      */
     public void setHeaders()
     {
-        for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+        try
         {
-            getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getName());
+            for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+            {
+                getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getName());
+            }
+            getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
+                    .setHeaderValue( "probability" );
         }
-        getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
-                .setHeaderValue( "probability" );
+        catch(Exception e)
+        {
+            System.out.println( e.getMessage() );
+        }
+        finally
+        {}
     }
     
     public void setHeaders(String varAttribute)
     {
-        
-        if ( varAttribute.toLowerCase().equals("description") )
+        try
         {
-            for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+            if ( varAttribute.toLowerCase().equals("description") )
             {
-                getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getDescription() );
-            }        
+                for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+                {
+                    getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getDescription() );
+                }        
+            }
+            else
+            {
+                for(int c = 0; c < getTable().getColumnCount()-1; c++ )
+                {
+                    getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getName() );
+                }        
+
+            }
+
+            getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
+                    .setHeaderValue( "probability" );
         }
-        else
+        catch(Exception e)
         {
-            for(int c = 0; c < getTable().getColumnCount()-1; c++ )
-            {
-                getTable().getColumnModel().getColumn(c).setHeaderValue(getVars().get(c).getName() );
-            }        
-        
+            System.out.println( e.getMessage() );
         }
-        
-        getTable().getColumnModel().getColumn( getTable().getColumnCount()-1 )
-                .setHeaderValue( "probability" );
+        finally
+        {}
     }    
 
     /**
@@ -434,6 +451,28 @@ public class Factor {
         setHeaders();
     }
 
+    /**
+     * create an empty table with cero rows. The headerColum can be
+     * 
+     * description = a long and more descriptive text for header. Recommended.
+     * name        = the name of th variable. Sometime is very short.
+     * id          = this is just a number. Do not use this.
+     * 
+     * @param headerColumn 
+     */
+    public void createEmptyTableCeroRows( String headerColumn )
+    {
+        if (getTable() == null)
+        {
+            setTable(new JTable(0, getVars().size() + 1 ));
+        }
+        JTablex.deleteRows(getTable());
+        
+        setHeaders( headerColumn );
+    }
+    
+    
+    
     public void FillTable()
     {
         createEmptyTable();

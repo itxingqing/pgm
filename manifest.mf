@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.9.4
 Created-By: 1.8.0_11-b12 (Oracle Corporation)
-Bundle-Name: Reduction factor - empty
-Bundle-Version: 2015.01.19
-Bundle-Date: 2015-01-19 16:54:29 CST
-Implementation-Title: Reduction factor - empty
-Implementation-Version: 2015.01.19
+Bundle-Name: Reduction - coded
+Bundle-Version: 2015.01.20
+Bundle-Date: 2015-01-20 17:01:54 CST
+Implementation-Title: Reduction - coded
+Implementation-Version: 2015.01.20
 Implementation-URL: http://www.example.com
 

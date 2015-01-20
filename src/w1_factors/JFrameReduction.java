@@ -3,6 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ **************************************************************************
+ *    _____      ________________
+ *   /  _  \    /  _  \__    ___/
+ *  /  /_\  \  /  /_\  \|    |   
+ * /    |    \/    |    \    |   
+ * \____|__  /\____|__  /____|   
+ *         \/         \/         
+ * 
+ * Description : 
+ * 
+ * Date        : 2015 - January - 20
+ * Author      : Arturo Alatriste Trujillo.
+ ****************************************************************************/
+
+
 package w1_factors;
 
 import java.util.ArrayList;
@@ -398,12 +415,13 @@ public class JFrameReduction
             
             // factor used as base, as reference.
             Factor baseFactor = factors.getByName( this.jComboBox_Factors.getSelectedItem().toString() );
-            //JTable baseT = baseFactor.getTable();
+            
+            f.setVars( baseFactor.getVars() );
+            f.createEmptyTableCeroRows(  "description" );
             
             Hashtable<String, String> values = new Hashtable<String, String>();
             String varDesc;
 
-            
             for(int r=0; r < baseFactor.getRowCount(); r++ )
             {
                 // get varValues from baseFactor Row
@@ -427,11 +445,11 @@ public class JFrameReduction
                 if (evaluator.Evaluate( ) == true )
                 { 
                     f.addRow( baseFactor, r );
+                    f.setProbability( baseFactor.getProbability(r) , f.getRowCount()-1 );
                 }            
-                
             }
             
-            
+            f.print();
             
             
             

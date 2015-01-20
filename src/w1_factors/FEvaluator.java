@@ -3,6 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ **************************************************************************
+ *    _____      ________________
+ *   /  _  \    /  _  \__    ___/
+ *  /  /_\  \  /  /_\  \|    |   
+ * /    |    \/    |    \    |   
+ * \____|__  /\____|__  /____|   
+ *         \/         \/         
+ * 
+ * Description : 
+ * 
+ * Date        : 2015 - January - 20
+ * Author      : Arturo Alatriste Trujillo.
+ ****************************************************************************/
+
+
 package w1_factors;
 
 
